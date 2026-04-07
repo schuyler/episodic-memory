@@ -1,4 +1,4 @@
-import { pipeline, env } from '@xenova/transformers';
+import { pipeline, env } from '@huggingface/transformers';
 // Disable progress callbacks to prevent stdout pollution in MCP context
 // In MCP, stdout is reserved for JSON-RPC communication
 env.allowLocalModels = true;
@@ -7,7 +7,7 @@ let embeddingPipeline = null;
 export async function initEmbeddings() {
     if (!embeddingPipeline) {
         console.error('Loading embedding model (first run may take time)...');
-        embeddingPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', { progress_callback: (() => { }) } // Disable progress output to stdout
+        embeddingPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', { progress_callback: () => { } } // Disable progress output to stdout
         );
         console.error('Embedding model loaded');
     }
